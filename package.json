@@ -10,9 +10,13 @@
   },
   "dependencies": {
     "babel": "^6.23.0",
+    "chart": "^0.1.2",
+    "chart.js": "^4.4.3",
     "firebase": "^10.12.4",
+    "lint": "^1.1.2",
     "vue": "^3.4.29",
-    "vue-router": "^4.3.3"
+    "vue-router": "^4.3.3",
+    "vuex": "^4.0.2"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^5.0.5",
