@@ -38,13 +38,13 @@ const store = createStore({
             alert("Wrong password")
             break
           default:
-            alert("Semothing went wrong")
-
+            alert(error.message)
+// auth/invalid-credential
         }
         return
       }
 
-      commit('SET_USER', auht.currentUser)
+      commit('SET_USER', auth.currentUser)
       router.push('/')
     },
 
@@ -79,7 +79,7 @@ const store = createStore({
         return
       }
 
-      commit('SET_USER', auht.currentUser)
+      commit('SET_USER', auth.currentUser)
       router.push('/')
     },
     
@@ -89,7 +89,23 @@ const store = createStore({
 
         commit('CLEAR_USER')
         router.push('/login')
-    } 
+    },
+    
+    fetchUser({commit}){
+      auth.onAuthStateChanged(async user =>{
+        if( user == null)
+        {
+          commit('CLEAR_USER')
+        }
+        else{
+          commit('SET_USER',user)
+
+          if(router.isReady() && router.currentRoute.value.path === '/login'){
+            router.push('/')
+          }
+        }
+      })
+    }
   },
   getters: {
     // count(state) {

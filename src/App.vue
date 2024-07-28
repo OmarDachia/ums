@@ -1,16 +1,27 @@
 <script setup>
-import { RouterLink, RouterView } from 'vue-router'
-import HelloWorld from './components/HelloWorld.vue'
+  import { RouterLink, RouterView } from 'vue-router'
+  import HelloWorld from './components/HelloWorld.vue'
+  import { onBeforeMount } from 'vue'
+  import { useStore } from 'vuex'
+
+  const store = useStore()
+
+  onBeforeMount(() => {
+    store.dispatch('fetchUser')
+  })
+
+  const user = store.state.user
+
 </script>
 
 <template>
 
   <main>
-    <ul class="nav">
+    <ul class="nav" v-if="$store.state.user">
       <li><RouterLink to="/" class="l active">Home</RouterLink></li>
       <li><RouterLink to="/about" class="l">About</RouterLink></li>
-      <!--<li><a href="#contact">Contact</a></li>
-      <li style="float:right"><a href="#about">About</a></li>-->
+      <!--<li><a href="#contact">Contact</a></li>-->
+      <li style="float:right;"><button class="l" style="background: red;" @click="$store.dispatch('logout')" >Logout</button></li>
     </ul>
   </main>
   
